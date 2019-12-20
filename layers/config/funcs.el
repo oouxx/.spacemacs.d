@@ -73,18 +73,3 @@ subheading level already exists within the buffer."
       (outshine-insert-heading)
       (set-mark (line-beginning-position)) (goto-char (line-end-position))
       (outline-demote 'region))))
-
-;;; lsp-java hook
-(add-hook 'java-mode-hook (lambda ()
-                            (setq c-basic-offset 4
-                                  tab-width 4
-                                  indent-tabs-mode nil)))
-
-(defun java/pre-init-dap-mode ()
-  (add-to-list 'spacemacs--dap-supported-modes 'java-mode))
-
-;;; search-engine
-
-(setq browse-url-browser-function 'browse-url-generic
-      engine/browser-function 'browse-url-generic
-      browse-url-generic-program "google-chrome")

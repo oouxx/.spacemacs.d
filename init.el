@@ -51,6 +51,12 @@ Check `dotspacemacs/get-variable-string-list' for all vars you can configure."
                                   "Source Code Pro")
                                :size ,(if (= 1440 (display-pixel-height)) 20 18))
    dotspacemacs-themes       '(
+                               monokai
+                               spacemacs-light
+                               spacemacs-dark
+                               solarized-dark
+                               solarized-light
+                               dracula
                                )
 
    ;; General
@@ -76,7 +82,7 @@ Check `dotspacemacs/get-variable-string-list' for all vars you can configure."
    dotspacemacs-emacs-leader-key  "M-m"
    dotspacemacs-emacs-command-key "SPC"
    dotspacemacs-leader-key        "SPC"
-   dotspacemacs-mode-line-theme   'all-the-icons))
+   dotspacemacs-mode-line-theme   'spacemacs))
 
 ;;;; Spacemacs/layers
 
@@ -84,6 +90,13 @@ Check `dotspacemacs/get-variable-string-list' for all vars you can configure."
   "Instantiate Spacemacs layers declarations and package configurations."
   (setq-default
    dotspacemacs-configuration-layers     '(
+                                           html
+                                           markdown
+                                           yaml
+                                           sql
+                                           default-optimize
+                                           misc
+                                           ;;my-org
                                            (config   :location local)
                                            (display  :location local)
                                            )
@@ -127,7 +140,6 @@ Check `dotspacemacs/get-variable-string-list' for all vars you can configure."
   ;; Depending on your OS, you may need a different/not-at-all need this.
   (when (and linux? server?)
     (add-to-list 'default-frame-alist '(fullscreen . fullboth)))
-
   )
 
 
@@ -137,8 +149,4 @@ Check `dotspacemacs/get-variable-string-list' for all vars you can configure."
   "Configuration that cannot be delegated to layers."
   (dotspacemacs/user-config/post-layer-load-config)
 
-  ;; Drop-in whatever config here, experiment!
   )
-
-;; Do not write anything past this comment. This is where Emacs will
-;; auto-generate custom variable definitions.

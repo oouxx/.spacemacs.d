@@ -11,8 +11,8 @@
                                           :repo "Ilazki/prettify-utils.el"))
 
         ;; Elsehwere-owned packages
-        spaceline-all-the-icons
-        ;;which-key
+        ;;spaceline-all-the-icons
+        ;; which-key
 
         ;; Personal display-related packages
         ;; (pretty-code     :location local)
@@ -99,55 +99,55 @@
 
 ;;;; Spaceline-all-the-icons
 
-(defun display/post-init-spaceline-all-the-icons ()
-  (spaceline-all-the-icons-theme)
-
-  (setq spaceline-highlight-face-func 'spaceline-highlight-face-default)
-
-  (setq spaceline-all-the-icons-icon-set-modified         'chain)
-  (setq spaceline-all-the-icons-icon-set-window-numbering 'square)
-  (setq spaceline-all-the-icons-separator-type            'none)
-  (setq spaceline-all-the-icons-primary-separator         "")
-
-  ;; !!!!!!!!!!!!!!!!
-  ;; !! https://github.com/domtronn/spaceline-all-the-icons.el/issues/55
-  ;; !! If you remove this - expect EXTREMELY degraded performance
-  ;; !! on files of more-or-less any size and of any type
-  ;; !!!!!!!!!!!!!!!!
-  (spaceline-toggle-projectile-root-off)
-  (spaceline-toggle-all-the-icons-projectile-off)
-  (spaceline-toggle-all-the-icons-buffer-id-off)
-
-
-  ;; Mode Segments
-  (spaceline-toggle-all-the-icons-minor-modes-off)
-
-  ;; Buffer Segments
-  (spaceline-toggle-all-the-icons-buffer-size-off)
-  (spaceline-toggle-all-the-icons-buffer-position-off)
-
-  ;; Git Segments
-  (spaceline-toggle-all-the-icons-git-status-off)
-  (spaceline-toggle-all-the-icons-vc-icon-off)
-  (spaceline-toggle-all-the-icons-vc-status-off)
-
-  ;; Misc Segments
-  (spaceline-toggle-all-the-icons-eyebrowse-workspace-off)
-  (spaceline-toggle-all-the-icons-flycheck-status-off)
-  (spaceline-toggle-all-the-icons-time-off))
+;;(defun display/post-init-spaceline-all-the-icons ()
+;;  (spaceline-all-the-icons-theme)
+;;
+;;  (setq spaceline-highlight-face-func 'spaceline-highlight-face-default)
+;;
+;;  (setq spaceline-all-the-icons-icon-set-modified         'chain)
+;;  (setq spaceline-all-the-icons-icon-set-window-numbering 'square)
+;;  (setq spaceline-all-the-icons-separator-type            'none)
+;;  (setq spaceline-all-the-icons-primary-separator         "")
+;;
+;;  ;; !!!!!!!!!!!!!!!!
+;;  ;; !! https://github.com/domtronn/spaceline-all-the-icons.el/issues/55
+;;  ;; !! If you remove this - expect EXTREMELY degraded performance
+;;  ;; !! on files of more-or-less any size and of any type
+;;  ;; !!!!!!!!!!!!!!!!
+;;  (spaceline-toggle-projectile-root-off)
+;;  (spaceline-toggle-all-the-icons-projectile-off)
+;;  (spaceline-toggle-all-the-icons-buffer-id-off)
+;;
+;;
+;;  ;; Mode Segments
+;;  (spaceline-toggle-all-the-icons-minor-modes-off)
+;;
+;;  ;; Buffer Segments
+;;  (spaceline-toggle-all-the-icons-buffer-size-off)
+;;  (spaceline-toggle-all-the-icons-buffer-position-off)
+;;
+;;  ;; Git Segments
+;;  (spaceline-toggle-all-the-icons-git-status-off)
+;;  (spaceline-toggle-all-the-icons-vc-icon-off)
+;;  (spaceline-toggle-all-the-icons-vc-status-off)
+;;
+;;  ;; Misc Segments
+;;  (spaceline-toggle-all-the-icons-eyebrowse-workspace-off)
+;;  (spaceline-toggle-all-the-icons-flycheck-status-off)
+;;  (spaceline-toggle-all-the-icons-time-off))
 
 ;;; Pretty Packages
 ;;;; Pretty-code
 
-(defun display/init-pretty-code ()
-  (use-package pretty-code
-    :config
-    (progn
-      (pretty-code-add-hook 'emacs-lisp-mode-hook '((:def "defun")))
-      (pretty-code-add-hook 'hy-mode-hook         '((:def "defn")
-                                                    (:lambda "fn")))
-      (pretty-code-add-hook 'python-mode-hook     '((:def "def")
-                                                    (:lambda "lambda"))))))
+;;(defun display/init-pretty-code ()
+;;  (use-package pretty-code
+;;    :config
+;;    (progn
+;;      (pretty-code-add-hook 'emacs-lisp-mode-hook '((:def "defun")))
+;;      (pretty-code-add-hook 'hy-mode-hook         '((:def "defn")
+;;                                                    (:lambda "fn")))
+;;      (pretty-code-add-hook 'python-mode-hook     '((:def "def")
+;;                                                    (:lambda "lambda"))))))
 
 ;;;; Pretty-eshell
 
@@ -208,10 +208,10 @@
     :config
     ;; !! This is required to avoid segfault when using emacs as daemon !!
     (spacemacs|do-after-display-system-init
-     ;;(pretty-fonts-add-hook 'prog-mode-hook pretty-fonts-fira-code-alist)
-     ;;(pretty-fonts-add-hook 'org-mode-hook  pretty-fonts-fira-code-alist)
+     ;; (pretty-fonts-add-hook 'prog-mode-hook pretty-fonts-fira-code-alist)
+     ;; (pretty-fonts-add-hook 'org-mode-hook  pretty-fonts-fira-code-alist)
 
-     (pretty-fonts-set-fontsets-for-fira-code)
+     ;; (pretty-fonts-set-fontsets-for-fira-code)
      (pretty-fonts-set-fontsets
       '(;; All-the-icons fontsets
         ("fontawesome"
