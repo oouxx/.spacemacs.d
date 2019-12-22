@@ -6,17 +6,11 @@
         all-the-icons-ivy
         all-the-icons-dired
         ;; pretty-mode
-        solarized-theme
         (prettify-utils :location (recipe :fetcher github
                                           :repo "Ilazki/prettify-utils.el"))
-
         ;; Elsehwere-owned packages
-        ;;spaceline-all-the-icons
-        ;; which-key
-
         ;; Personal display-related packages
-        ;; (pretty-code     :location local)
-        (pretty-eshell   :location local)
+        ;;(pretty-eshell   :location local)
         (pretty-fonts    :location local)
         (pretty-magit    :location local)
         (pretty-outlines :location local)))
@@ -84,122 +78,63 @@
 (defun display/init-prettify-utils ()
   (use-package prettify-utils))
 
-;;;; Solarized-theme
-
-(defun display/init-solarized-theme ()
-  (use-package solarized-theme))
 
 ;;; Unowned Packages
-;;;; Which-key
 
-;;(defun display/post-init-which-key ()
-;;  (when (configuration-layer/package-used-p 'pretty-fonts)
-;;    (setq which-key-separator " ")
-;;    (setq which-key-prefix-prefix " ")))
-
-;;;; Spaceline-all-the-icons
-
-;;(defun display/post-init-spaceline-all-the-icons ()
-;;  (spaceline-all-the-icons-theme)
-;;
-;;  (setq spaceline-highlight-face-func 'spaceline-highlight-face-default)
-;;
-;;  (setq spaceline-all-the-icons-icon-set-modified         'chain)
-;;  (setq spaceline-all-the-icons-icon-set-window-numbering 'square)
-;;  (setq spaceline-all-the-icons-separator-type            'none)
-;;  (setq spaceline-all-the-icons-primary-separator         "")
-;;
-;;  ;; !!!!!!!!!!!!!!!!
-;;  ;; !! https://github.com/domtronn/spaceline-all-the-icons.el/issues/55
-;;  ;; !! If you remove this - expect EXTREMELY degraded performance
-;;  ;; !! on files of more-or-less any size and of any type
-;;  ;; !!!!!!!!!!!!!!!!
-;;  (spaceline-toggle-projectile-root-off)
-;;  (spaceline-toggle-all-the-icons-projectile-off)
-;;  (spaceline-toggle-all-the-icons-buffer-id-off)
-;;
-;;
-;;  ;; Mode Segments
-;;  (spaceline-toggle-all-the-icons-minor-modes-off)
-;;
-;;  ;; Buffer Segments
-;;  (spaceline-toggle-all-the-icons-buffer-size-off)
-;;  (spaceline-toggle-all-the-icons-buffer-position-off)
-;;
-;;  ;; Git Segments
-;;  (spaceline-toggle-all-the-icons-git-status-off)
-;;  (spaceline-toggle-all-the-icons-vc-icon-off)
-;;  (spaceline-toggle-all-the-icons-vc-status-off)
-;;
-;;  ;; Misc Segments
-;;  (spaceline-toggle-all-the-icons-eyebrowse-workspace-off)
-;;  (spaceline-toggle-all-the-icons-flycheck-status-off)
-;;  (spaceline-toggle-all-the-icons-time-off))
 
 ;;; Pretty Packages
-;;;; Pretty-code
-
-;;(defun display/init-pretty-code ()
-;;  (use-package pretty-code
-;;    :config
-;;    (progn
-;;      (pretty-code-add-hook 'emacs-lisp-mode-hook '((:def "defun")))
-;;      (pretty-code-add-hook 'hy-mode-hook         '((:def "defn")
-;;                                                    (:lambda "fn")))
-;;      (pretty-code-add-hook 'python-mode-hook     '((:def "def")
-;;                                                    (:lambda "lambda"))))))
 
 ;;;; Pretty-eshell
 
-(defun display/init-pretty-eshell ()
-  (use-package pretty-eshell
-    :init
-    (progn
-      ;; Change default banner message
-      (setq eshell-banner-message (s-concat (s-repeat 20 "---") "\n\n"))
-
-      ;; More prompt styling
-      (setq pretty-eshell-header "\n︳")
-      (setq pretty-eshell-prompt-string " "))
-
-    :config
-    (progn
-      ;; Directory
-      (pretty-eshell-section
-       esh-dir
-       "\xf07c"  ; 
-       (abbreviate-file-name (eshell/pwd))
-       '(:foreground "#268bd2" :bold bold :underline t))
-
-      ;; Git Branch
-      (pretty-eshell-section
-       esh-git
-       "\xe907"  ; 
-       (magit-get-current-branch)
-       '(:foreground "#8D6B94"))
-
-      ;; Python Virtual Environment
-      (pretty-eshell-section
-       esh-python
-       "\xe928"  ; 
-       pyvenv-virtual-env-name)
-
-      ;; Time
-      (pretty-eshell-section
-       esh-clock
-       "\xf017"  ; 
-       (format-time-string "%H:%M" (current-time))
-       '(:foreground "forest green"))
-
-      ;; Prompt Number
-      (pretty-eshell-section
-       esh-num
-       "\xf0c9"  ; 
-       (number-to-string pretty-eshell-prompt-num)
-       '(:foreground "brown"))
-
-      (setq pretty-eshell-funcs
-            (list esh-dir esh-git esh-python esh-clock esh-num)))))
+;;(defun display/init-pretty-eshell ()
+;;  (use-package pretty-eshell
+;;    :init
+;;    (progn
+;;      ;; Change default banner message
+;;      (setq eshell-banner-message (s-concat (s-repeat 20 "---") "\n\n"))
+;;
+;;      ;; More prompt styling
+;;      (setq pretty-eshell-header "\n︳")
+;;      (setq pretty-eshell-prompt-string " "))
+;;
+;;    :config
+;;    (progn
+;;      ;; Directory
+;;      (pretty-eshell-section
+;;       esh-dir
+;;       "\xf07c"  ; 
+;;       (abbreviate-file-name (eshell/pwd))
+;;       '(:foreground "#268bd2" :bold bold :underline t))
+;;
+;;      ;; Git Branch
+;;      (pretty-eshell-section
+;;       esh-git
+;;       "\xe907"  ; 
+;;       (magit-get-current-branch)
+;;       '(:foreground "#8D6B94"))
+;;
+;;      ;; Python Virtual Environment
+;;      (pretty-eshell-section
+;;       esh-python
+;;       "\xe928"  ; 
+;;       pyvenv-virtual-env-name)
+;;
+;;      ;; Time
+;;      (pretty-eshell-section
+;;       esh-clock
+;;       "\xf017"  ; 
+;;       (format-time-string "%H:%M" (current-time))
+;;       '(:foreground "forest green"))
+;;
+;;      ;; Prompt Number
+;;      (pretty-eshell-section
+;;       esh-num
+;;       "\xf0c9"  ; 
+;;       (number-to-string pretty-eshell-prompt-num)
+;;       '(:foreground "brown"))
+;;
+;;      (setq pretty-eshell-funcs
+;;            (list esh-dir esh-git esh-python esh-clock esh-num)))))
 
 ;;;; Pretty-fonts
 

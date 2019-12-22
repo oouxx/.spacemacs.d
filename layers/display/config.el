@@ -16,7 +16,6 @@
 ;;; Configuration
 ;;;; Core
 
-(setq solarized-use-variable-pitch nil)
 (setq face-remapping-alist '(;; Headers - outlines match org
                              (outline-1 org-level-1)
                              (outline-2 org-level-2)
@@ -39,31 +38,6 @@
 ;;;;; Headers
 
 (setq display/headers/common '(:underline t :inherit nil))
-(setq display/headers/zenburn
-      `((org-level-1
-         ,@display/headers/common
-         :height 1.35
-         :foreground "#DFAF8F")
-        (org-level-2
-         ,@display/headers/common
-         :height 1.25
-         :foreground "#BFEBBF")
-        (org-level-3
-         ,@display/headers/common
-         :height 1.15
-         :foreground "#7CB8BB")))
-(setq display/headers/solarized-light
-      `((org-level-1
-         ,@display/headers/common
-         :height 1.35
-         :foreground "#a71d31")
-        (org-level-2
-         ,@display/headers/common
-         :height 1.25
-         :foreground "#8D6B94")
-        (org-level-3
-         ,@display/headers/common
-         :height 1.15)))
 
 ;;;;; Org-blocks
 
@@ -104,66 +78,3 @@
         (font-lock-doc-face
          :italic t
          :weight normal)))
-
-;;; Theming
-;;;; Common
-
-(setq display/common-theming
-      `(,@display/company
-        ,@display/mode-line
-        ,@display/org-blocks
-
-        (avy-background-face :italic nil)
-        (fringe :background nil)))
-
-;;;; Themes
-
-(setq display/solarized-light-theming
-      `(;; Overwrites
-        (mode-line-inactive :background "#eee8d5"
-                            ,@(alist-get 'mode-line-inactive
-                                         display/mode-line))
-
-        (font-lock-comment-face :foreground "#586e75"
-                                ,@(alist-get 'font-lock-comment-face
-                                             display/font-locks))
-        (font-lock-doc-face :foreground "#2aa198"
-                            ,@(alist-get 'font-lock-doc-face
-                                         display/font-locks))
-
-        ;; Extra
-        (sp-show-pair-match-face :background  "CadetBlue3")
-        (auto-dim-other-buffers-face :background "#fcf4df")
-
-        ;; ... Experiments ...
-        ))
-
-(setq display/zenburn-theming
-      `(;; Overwrites
-        (font-lock-comment-face :foreground "gray50"
-                                ,@(alist-get 'font-lock-comment-face
-                                             display/font-locks))
-        (font-lock-doc-face :foreground "gray65"
-                            ,@(alist-get 'font-lock-doc-face
-                                         display/font-locks))
-
-        ;; Extra
-        (font-lock-comment-delimiter-face :foreground "gray35")
-        (font-lock-function-name-face     :foreground "CadetBlue2")
-        (font-lock-type-face              :foreground "LightCoral")
-        (auto-dim-other-buffers-face      :background "gray22")
-
-        ;; ... Experiments ...
-        ))
-
-;;;; Set Modifications
-
-;; This variable is the only `theming' layer requirement to enable our theming
-
-(setq theming-modifications
-      `((zenburn         ,@display/common-theming
-                         ,@display/headers/zenburn
-                         ,@display/zenburn-theming)
-        (solarized-light ,@display/common-theming
-                         ,@display/headers/solarized-light
-                         ,@display/solarized-light-theming)))

@@ -1,4 +1,4 @@
-;;; packages.el --- org layer packages file for Spacemacs.
+;;; packages.el --- programming layer packages file for Spacemacs.
 ;;
 ;; Copyright (c) 2012-2018 Sylvain Benner & Contributors
 ;;
@@ -18,19 +18,19 @@
 ;;
 ;;
 ;; Briefly, each package to be installed or configured by this layer should be
-;; added to `org-packages'. Then, for each package PACKAGE:
+;; added to `programming-packages'. Then, for each package PACKAGE:
 ;;
 ;; - If PACKAGE is not referenced by any other Spacemacs layer, define a
-;;   function `org/init-PACKAGE' to load and initialize the package.
+;;   function `programming/init-PACKAGE' to load and initialize the package.
 
 ;; - Otherwise, PACKAGE is already referenced by another Spacemacs layer, so
-;;   define the functions `org/pre-init-PACKAGE' and/or
-;;   `org/post-init-PACKAGE' to customize the package as it is loaded.
+;;   define the functions `programming/pre-init-PACKAGE' and/or
+;;   `programming/post-init-PACKAGE' to customize the package as it is loaded.
 
 ;;; Code:
 
-(defconst my-org-packages
-  '())
-
+(defconst programming-packages
+  '(
+    ))
 
 ;;; packages.el ends here

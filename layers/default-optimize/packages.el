@@ -31,9 +31,9 @@
 
 (defconst default-optimize-packages
   '(
+    better-defaults
     (dired-mode :location built-in)
     (profiler :location built-in)
-    (recentf :location built-in)
     ))
 
 (defun defualt-optimize/init-dired-mode()
@@ -73,3 +73,11 @@
   (use-package profiler
     :init
     (evilified-state-evilify profiler-report-mode profiler-report-mode-map)))
+
+(defun default-optimize/init-chinese ()
+  (use-package chinese
+    :init))
+
+(defun default-optimize/better-defaults ()
+  (use-package chinese
+    :init))

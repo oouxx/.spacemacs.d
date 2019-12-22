@@ -29,17 +29,17 @@
 
 ;;; Code:
 
-(defconst misc-packages
-  '(
-    golden-ratio
-    expand-region
-    ranger
-    (chinese :variable chinese-default-input-method 'pinyin
-             chinese-enable-youdao-dict t)
-    (highlight-global :location (recipe :fetcher github :repo "glen-dai/highlight-global"))
-    peep-dired
-    multiple-cursors
-    ))
+(setq misc-packages
+      '(
+        golden-ratio
+        expand-region
+        ranger
+        (chinese :variable chinese-default-input-method 'pinyin
+                 chinese-enable-youdao-dict t)
+        (highlight-global :location (recipe :fetcher github :repo "glen-dai/highlight-global"))
+        peep-dired
+        multiple-cursors
+        ))
 
 ;;(defun zilongshanren-misc/post-init-smartparens ()
 ;;  (use-package smartparens

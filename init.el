@@ -1,25 +1,8 @@
 ;;; Setup -*- lexical-binding: t; -*-
 ;;;; Commentary
-
-;; -- Eric Kaschalk's Spacemacs Configuration --
-;; -- Contact: ekaschalk@gmail.com --
-;; -- MIT License --
-;; -- Emacs 26.1 ~ Spacemacs Dev Branch 0.300.0.x ~ pkgs updated: 1/21/19 --
-;; -- http://modernemacs.com --
-;;
-;; Personal layers host most of my configuration - see README.
-;; Ligatures and icons require installation - see README.
-;;
-;; Layers are declared in `layers/config/layers.el'.
-;;
-;; Set `redo-bindings?' to true if you - want my aggressive rebindings.
-;; Set `server?'        to true if you - use emacs as a daemon.
-;;
-;; `init.el' sets spacemacs up, defining required `dotspacemacs/..' funcs & vars.
-
 ;;;; Constants
 
-(defconst eric?    (string= "Eric Kaschalk" (user-full-name)) "Am I me?")
+;;(defconst eric?    (string= "Eric Kaschalk" (user-full-name)) "Am I me?")
 (defconst linux?   (eq system-type 'gnu/linux) "Are we on a linux machine?")
 (defconst mac?     (eq system-type 'darwin)    "Are we on a macOS machine?")
 (defconst windows? (not (or linux? mac?))      "Are we on windows machine?")
@@ -45,11 +28,10 @@ See the commentary in the config layer's local pkg `redo-spacemacs'.")
 They are all defined in `~/.emacs.d/core/core-dotspacemacs.el'.
 Check `dotspacemacs/get-variable-string-list' for all vars you can configure."
   (setq-default
-   ;; Display
-   dotspacemacs-default-font `(,(if (x-list-fonts "Operator Mono")
-                                    "operator mono medium"
-                                  "Source Code Pro")
-                               :size ,(if (= 1440 (display-pixel-height)) 20 18))
+   dotspacemacs-default-font '("Source Code Pro"
+                               :size 14
+                               :weight normal
+                               :width normal)
    dotspacemacs-themes       '(
                                monokai
                                spacemacs-light
@@ -73,7 +55,8 @@ Check `dotspacemacs/get-variable-string-list' for all vars you can configure."
    dotspacemacs-pretty-docs                t
    dotspacemacs-search-tools               '("ag" "rg" "pt" "ack" "grep")
    dotspacemacs-scratch-mode               'org-mode
-   dotspacemacs-startup-lists              nil
+   dotspacemacs-startup-lists              '((recents . 5)
+                                             (projects . 7))
    dotspacemacs-whitespace-cleanup         'trailing
 
 
@@ -90,29 +73,83 @@ Check `dotspacemacs/get-variable-string-list' for all vars you can configure."
   "Instantiate Spacemacs layers declarations and package configurations."
   (setq-default
    dotspacemacs-configuration-layers     '(
-                                           html
-                                           markdown
-                                           yaml
-                                           sql
-                                           default-optimize
-                                           misc
-                                           ;;my-org
-                                           (config   :location local)
-                                           (display  :location local)
+                                          (auto-completion :variables auto-completion-enable-sort-by-usage t
+                                                                 auto-completion-enable-snippets-in-popup t
+                                                                 auto-completion-tab-key-behavior 'cycle
+                                                                 :disabled-for org markdown)
+                                          better-defaults
+                                          (git :variables
+                                               git-magit-status-fullscreen t
+                                               magit-push-always-verify nil
+                                               magit-save-repository-buffers 'dontask
+                                               magit-revert-buffers 'silent
+                                               magit-refs-show-commit-count 'all
+                                               magit-revision-show-gravatars nil)
+                                          (ivy :variables
+                                               ivy-extra-directories nil
+                                               ivy-enable-advanced-buffer-information nil)
+                                          (org :variables
+                                              org-want-todo-bindings t)
+                                          syntax-checking
+                                          (version-control :variables
+                                                          version-control-global-margin t
+                                                          version-control-diff-tool 'git-gutter+)
+                                          (spacemacs-layouts :variables layouts-enable-autosave nil
+                                                             layouts-autosave-delay 300)
+                                          colors
+                                          graphviz
+                                          ranger
+                                          (ibuffer :variables
+                                                  ibuffer-group-buffers-by 'projects)
+
+                                          html
+                                          latex
+                                          markdown
+                                          yaml
+                                          lsp
+                                          emacs-lisp
+                                          go
+                                          (c-c++ :variables
+                                                c-c++-backend 'lsp-clangd
+                                                c-c++-enable-google-style t
+                                                c-c++-enable-google-newline t)
+
+                                          (python :variables
+                                                  python-backend 'lsp
+                                                  python-lsp-server 'pyls
+                                                  python-test-runner 'pytest
+                                                  python-spacemacs-indent-guess nil)
+                                           java
+                                           (chinese :variables chinese-default-input-method 'pinyin
+                                                    chinese-enable-youdao-dict t)
+                                           ;;(default-optimize :location local)
+                                           ;;(misc :location local)
+                                           ;;(display  :location local)
+                                           ;;(programming :location local)
+                                           ;;(my-org :location local)
                                            )
    dotspacemacs-configuration-layer-path '("~/.spacemacs.d/layers/")
-   dotspacemacs-additional-packages      '(buttercup)
+   dotspacemacs-additional-packages      '()
+   dotspacemacs-install-packages 'used-only
    dotspacemacs-frozen-packages          '()
    dotspacemacs-excluded-packages
-   '(;; Must Exclude (for styling, functionality, bug-fixing reasons)
-     fringe importmagic scss-mode vi-tilde-fringe
-
-     ;; Packages I don't use (non-exhaustive)
-     anzu centered-cursor-mode column-enforce-mode company-statistics
-     doom-modeline eshell-prompt-extras evil-anzu evil-mc evil-tutor
-     fancy-battery fill-column-indicator gnuplot golden-ratio indent-guide
-     live-py-mode multi-term multiple-cursors mwim neotree paradox py-isort
-     yapfify)))
+   '(;; Must Exclude (for styling, functionality, bug-fixing reasons) fringe importmagic scss-mode vi-tilde-fringe
+                    org-projectile org-brain magit-gh-pulls magit-gitflow  evil-mc realgud tern company-tern
+                    evil-args evil-ediff evil-exchange evil-unimpaired
+                    evil-indent-plus volatile-highlights smartparens
+                    spaceline holy-mode skewer-mode rainbow-delimiters
+                    highlight-indentation vi-tilde-fringe eyebrowse ws-butler
+                    org-bullets smooth-scrolling org-repo-todo org-download org-timer
+                    livid-mode git-gutter git-gutter-fringe  evil-escape
+                    leuven-theme gh-md evil-lisp-state spray lorem-ipsum symon
+                    ac-ispell ace-jump-mode auto-complete auto-dictionary
+                    clang-format define-word google-translate disaster epic
+                    fancy-battery org-present orgit orglue spacemacs-theme
+                    helm-flyspell flyspell-correct-helm clean-aindent-mode
+                    helm-c-yasnippet ace-jump-helm-line helm-make magithub
+                    helm-themes helm-swoop helm-spacemacs-help smeargle
+                    ido-vertical-mode flx-ido company-quickhelp ivy-rich helm-purpose
+     )))
 
 ;;;; Spacemacs/user-init
 
@@ -124,6 +161,9 @@ Check `dotspacemacs/get-variable-string-list' for all vars you can configure."
         '(("melpa-cn" . "http://mirrors.cloud.tencent.com/elpa/melpa/")
           ("org-cn"   . "http://mirrors.cloud.tencent.com/elpa/org/")
           ("gnu-cn"   . "http://mirrors.cloud.tencent.com/elpa/gnu/")))
+  ;; enable proxy
+  ;; anacond-mode will fail
+  ;;(setq socks-server '("Default server" "127.0.0.1" 1080 5))
   )
 
 ;;;; Spacemacs/user-config
@@ -149,4 +189,23 @@ Check `dotspacemacs/get-variable-string-list' for all vars you can configure."
   "Configuration that cannot be delegated to layers."
   (dotspacemacs/user-config/post-layer-load-config)
 
+  ;;解决org表格里面中英文对齐的问题 
+  (when (configuration-layer/layer-usedp 'chinese)
+    (when (and (spacemacs/system-is-mac) window-system)
+      (spacemacs//set-monospaced-font "Source Code Pro" "Hiragino Sans GB" 14 16)))
+
+  ;; force horizontal split window
+  (setq split-width-threshold 120)
+  ;; (linum-relative-on)
+
+  (spacemacs|add-company-backends :modes text-mode)
+  (add-hook 'doc-view-mode-hook 'auto-revert-mode)
+
+  (global-hungry-delete-mode t)
+  (spacemacs|diminish helm-gtags-mode)
+  (spacemacs|diminish ggtags-mode)
+  (spacemacs|diminish which-key-mode)
+  (spacemacs|diminish spacemacs-whitespace-cleanup-mode)
+  (spacemacs|diminish counsel-mode)
   )
+
